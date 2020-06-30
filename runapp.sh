@@ -25,7 +25,7 @@ HOURS=$FLUSH_HOURS
 MINUTES=$FLUSH_MINUTES
 
 while getopts '?pa:e:l:h:m:' OPTION; do #'?pa:e:r:l:h:m:' OPTION; do
-  var=$(printf "%d\n" $OPTARG 2>/dev/null)
+  var=$(printf "%d\n" "$OPTARG" 2>/dev/null)
   case "$OPTION" in
     a)
         if [ -f "$OPTARG" ]; then
@@ -40,38 +40,38 @@ while getopts '?pa:e:l:h:m:' OPTION; do #'?pa:e:r:l:h:m:' OPTION; do
     #         HOST=$OPTARG
     #     fi;;
     l)
-        if [ $var -gt 0 ]; then
-            LIMIT=$OPTARG
+        if [ "$var" -gt 0 ]; then
+            LIMIT=$var
         fi;;
     h)
-        if [ $var -gt 0 ]||[ $var -eq 0 ]&&[ $MINUTES != 0 ]; then
-            HOURS=$OPTARG
+        if [ "$var" -gt 0 ]||[ "$var" -eq 0 ]&&[ "$MINUTES" != 0 ]; then
+            HOURS=$var
         fi;;
     m)
-        if [ $var -gt 0 ]||[ $var -eq 0 ]&&[ $HOURS != 0 ]; then
-            MINUTES=$OPTARG
+        if [ "$var" -gt 0 ]||[ "$var" -eq 0 ]&&[ "$HOURS" != 0 ]; then
+            MINUTES=$var
         fi;;
     p)
         print=true;;
     ?)
-        echo "Usage: $0 [-?] [-a app-name] [-e environ] [-p] [-l size] [-h hours] [-m minutes]"
-        #echo "Usage: $0 [-?] [-a app-name] [-e environ] [-r host-name] [-p] [-l size] [-h hours] [-m minutes]"
-        echo "Run flask app '$FLASK_APP' in '$FLASK_ENV' environment with hostname '$FLASK_RUN_HOST' (by default)."
-        echo ""
-        echo "Current defaults are:"
-        echo "  FLUSH_LIMIT   = $FLUSH_LIMIT"
-        echo "  FLUSH_HOURS   = $FLUSH_HOURS"
-        echo "  FLUSH_MINUTES = $FLUSH_MINUTES"
-        echo ""
-        echo "Options:"
-        echo "  -? \t\t display this help and exit"
-        echo "  -p \t\t print out values of parameters before running"
-        echo "  -a app-name \t run using a different flask app"
-        echo "  -e environ \t run using different flask environment (development or production)"
-        #echo "  -r host-name \t run using different flask hostname"
-        echo "  -l size \t change how much data is needed before buffer flushing (>=1)"
-        echo "  -h hours \t flush the buffer every so hours (>=0)"
-        echo "  -m minutes \t flush the buffer every so minutes (>=0)"
+        printf "Usage: $0 [-?] [-a app-name] [-e environ] [-p] [-l size] [-h hours] [-m minutes]\n"
+        #printf "Usage: $0 [-?] [-a app-name] [-e environ] [-r host-name] [-p] [-l size] [-h hours] [-m minutes]\n"
+        printf "Run flask app '$FLASK_APP' in '$FLASK_ENV' environment with hostname '$FLASK_RUN_HOST' (by default).\n"
+        printf "\n"
+        printf "Current defaults are:\n"
+        printf "  FLUSH_LIMIT   = $FLUSH_LIMIT\n"
+        printf "  FLUSH_HOURS   = $FLUSH_HOURS\n"
+        printf "  FLUSH_MINUTES = $FLUSH_MINUTES\n"
+        printf "\n"
+        printf "Options:\n"
+        printf "  -? \t\t display this help and exit\n"
+        printf "  -p \t\t print out values of parameters before running\n"
+        printf "  -a app-name \t run using a different flask app\n"
+        printf "  -e environ \t run using different flask environment (development or production)\n"
+        #printf "  -r host-name \t run using different flask hostname\n"
+        printf "  -l size \t change how much data is needed before buffer flushing (>=1)\n"
+        printf "  -h hours \t flush the buffer every so hours (>=0)\n"
+        printf "  -m minutes \t flush the buffer every so minutes (>=0)\n"
         exit 0;;
   esac
 done
@@ -85,10 +85,10 @@ FLUSH_HOURS=$HOURS
 FLUSH_MINUTES=$MINUTES
 
 if $print; then
-    echo " Running flask app '$FLASK_APP' in '$FLASK_ENV' environment with hostname '$FLASK_RUN_HOST'."
-    echo " Flush size limit: $FLUSH_LIMIT"
-    echo " Reflush every $FLUSH_HOURS hour(s) $FLUSH_MINUTES minute(s)"
-    echo ""
+    printf " Running flask app '$FLASK_APP' in '$FLASK_ENV' environment with hostname '$FLASK_RUN_HOST'.\n"
+    printf " Flush size limit: $FLUSH_LIMIT\n"
+    printf " Reflush every $FLUSH_HOURS hour(s) $FLUSH_MINUTES minute(s)\n"
+    printf "\n"
 fi
 
 flask run
