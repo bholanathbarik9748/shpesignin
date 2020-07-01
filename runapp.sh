@@ -6,7 +6,10 @@ print=false
 #flask variables
 export FLASK_APP=app.py
 export FLASK_ENV=development
-export FLASK_RUN_HOST=shpe.uci.edu
+export FLASK_RUN_HOST=localhost
+
+# Uncomment the line below if you've followed the instructions in README.md
+# export FLASK_RUN_HOST=shpe.uci.edu
 
 #size of buffer before trying to flush
 export FLUSH_LIMIT=1
@@ -53,7 +56,7 @@ while getopts '?pa:e:l:h:m:' OPTION; do #'?pa:e:r:l:h:m:' OPTION; do
         fi;;
     p)
         print=true;;
-    ?)
+    ?)s
         printf "Usage: $0 [-?] [-a app-name] [-e environ] [-p] [-l size] [-h hours] [-m minutes]\n"
         #printf "Usage: $0 [-?] [-a app-name] [-e environ] [-r host-name] [-p] [-l size] [-h hours] [-m minutes]\n"
         printf "Run flask app '$FLASK_APP' in '$FLASK_ENV' environment with hostname '$FLASK_RUN_HOST' (by default).\n"
