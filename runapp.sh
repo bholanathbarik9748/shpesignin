@@ -56,7 +56,7 @@ while getopts '?pa:e:l:h:m:' OPTION; do #'?pa:e:r:l:h:m:' OPTION; do
         fi;;
     p)
         print=true;;
-    ?)s
+    ?)
         printf "Usage: $0 [-?] [-a app-name] [-e environ] [-p] [-l size] [-h hours] [-m minutes]\n"
         #printf "Usage: $0 [-?] [-a app-name] [-e environ] [-r host-name] [-p] [-l size] [-h hours] [-m minutes]\n"
         printf "Run flask app '$FLASK_APP' in '$FLASK_ENV' environment with hostname '$FLASK_RUN_HOST' (by default).\n"
